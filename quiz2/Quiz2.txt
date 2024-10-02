@@ -1,0 +1,94 @@
+Brute Force Approach:
+We want to check every integer t in the array A and find the integers a and c such that 
+- a is exactly 3 positions before t
+- c is exactly 3 positions after t
+Then, for every t, we compute the summation t = a + c and keep track of the max 3-sum integer and its index
+     
+Brute Force Approach Pseudo-Code:
+p.s. int findMax3Summation(int[] A) {
+    int n = A.length;
+
+    if (n < 7) return -1; // No valid 3-sum in an array is smaller than 7
+
+    int maxSum = Integer.MIN_VALUE;
+    int maxIndex = -1;
+
+    for (int t = 3; t <= n - 4; t++) {
+        int a = A[t - 3];
+        int c = A[t + 3];
+        int sum = a + c;
+
+        if (sum > maxSum) {
+            maxSum = sum;
+            maxIndex = t;
+        }
+    }
+
+    return maxIndex;
+}
+
+Brute Force Approach Time and Space Complexity:
+- Time Complexity: O(n) because the algorithm iterates through the array once
+- Space Complexity: O(1) because no additional memory is used except for a some variables
+
+
+
+
+
+Divide and Conquer Approach: 
+1. Split the array into two halves, each of which are at least size 7 (we need at least 7 elements for a valid 3-sum: one middle element and two elements at 3-hop distances)
+2. Recursively find the max 3-sum in the left and right halves
+3. Check the crossing of the two halves if there exists a valid 3-sum
+4. Return the max 3-sum of the three possiblities (left, right, and cross summations)
+
+Divde and Conquer Approach Pseudocode:
+p.s. int findMax3Summation(int[] A, int l, int r) {
+    if (r - l < 7) return -1; // No valid 3-sum in an array is smaller than 7
+    
+    int mid = (l + r) / 2;
+
+    int lMaxIndex = findMax3Summation(A, l, mid);
+    int rMaxIndex = findMax3Summation(A, mid + 1, r);
+    int crossMaxIndex = findCrossMax3Summation(A, l, mid, r);
+
+    // Return the index with the maximum 3-summation
+    int maxLSum = (lMaxIndex == -1) ? Integer.MIN_VALUE : A[lMaxIndex];
+    int maxRSum = (rMaxIndex == -1) ? Integer.MIN_VALUE : A[rMaxIndex];
+    int maxCrossSum = (crossMaxIndex == -1) ? Integer.MIN_VALUE : A[crossMaxIndex];
+
+    if (maxLSum >= maxRSum && maxLSum >= maxCrossSum) return lMaxIndex;
+    else if (maxRSum >= maxLSum && maxRSum >= maxCrossSum) return rMaxIndex;
+    else return crossMaxIndex;
+}
+
+p.s. int findCrossMax3Summation(int[] A, int l, int mid, int r) {
+    int maxSum = Integer.MIN_VALUE;
+    int maxIndex = -1;
+
+    for (int t = mid - 3; t <= mid + 3; t++) {
+        if (t - 3 >= l && t + 3 <= r) {
+            int a = A[t - 3];
+            int c = A[t + 3];
+            int sum = a + c;
+
+            if (sum > maxSum) {
+                maxSum = sum;
+                maxIndex = t;
+            }
+        }
+    }
+
+    return maxIndex;
+}
+
+Divide and Conquer Approach Time and Space Complexity:
+- Time Complexity: O(nlogn); The array is divided recursively and at each level, constant-time operation (checking elements 3 hops away) is performed. Since the array is divided into two halves at each step, the depth of recursion is O(logn) and each step involves O(n) work. This leads to a total runtime complexity of O(nlogn).
+- Space Complexity: O(logn) because the array is recurisvely split log n times.
+
+
+
+
+
+Why are both approaches correct?
+- Brute Force Approach: It checks every possible valid 3-sum by iterating through all potential middle elements and checking the elements 3 hops before and after. 
+- Divide and Conquer Approach: It splits the array into subarrays, solves for the maximum 3-sum in each subarray, then checks for any cross-summation cases, and returns the max possible result.

@@ -16,7 +16,8 @@ p.s. int findMax3Summation(int[] A) {
     for (int t = 3; t <= n - 4; t++) {
         int a = A[t - 3];
         int c = A[t + 3];
-        int sum = a + c;
+        int sum;
+        A[t] == a + c ? sum = A[t] : break;
 
         if (sum > maxSum) {
             maxSum = sum;
@@ -69,7 +70,8 @@ p.s. int findCrossMax3Summation(int[] A, int l, int mid, int r) {
         if (t - 3 >= l && t + 3 <= r) {
             int a = A[t - 3];
             int c = A[t + 3];
-            int sum = a + c;
+            int sum;
+            A[t] == a + c ? sum = A[t] : break;
 
             if (sum > maxSum) {
                 maxSum = sum;

@@ -1,0 +1,14 @@
+Problem: Given an integer array A, find an integer b that is the maximum 3-summation integer.
+
+Definition: A integer b is called a 3-summation if it is the summation of two intergers a and c, where a is before and c is after t in the array, whose distances (in hops) dist(a, t) == dist(t, c) and both are exactly 3 hops.
+
+Example: In the array A = [5, 5, 8, -1, 6, 7, 4, 1, 9, 0, 10, 2], 6 and 9 are 3-summation integers in the array where 6 = 5 +1 (underlined) and 9 = 7+2 (underlined). Both [5 and 1] and [7 and 2] are exactly 3 hops away from 6 and 9.
+
++ Input: An array A containing n integers.
++ Output: The index of the 3-summation integer with maximum value.
+
+Answer the following questions.
+1. Your brute force and divide-and-conquer approachs (3 – 6 steps)
+2. Write pseudo-code for your approachs to solve the problem
+3. Is/Are your approach(s) correct?
+4. Time and space complexity of your answer(s).

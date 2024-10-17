@@ -10,7 +10,7 @@ public class Q1 {
 
     public static int getMaxKCenter(int[] arr, int k) {
         if (arr.length == 0) return -1;  
-    if (arr.length < 2 * k + 1) return -1;  
+        if (arr.length < 2 * k + 1) return -1;  
 
         int[] temp = new int[arr.length]; 
         for (int i = k, j = 0; i < arr.length - k - 1; i++) {

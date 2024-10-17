@@ -42,8 +42,8 @@ public class Q4 {
         for (int i = 0; i < arr.length; i++) temp.add(arr[i]);
 
         double[] result = new double[temp.size()];
-        int i = 0;
-        for (double val : temp) result[i++] = val;
+        int idx = 0;
+        for (double val : temp) result[idx++] = val;
 
         return result;
     }

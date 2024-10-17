@@ -14,10 +14,8 @@ public class Q5BruteForceApproach {
     }
 
     public static ArrayList<Integer> findMaxCoinsBruteForce(int[][] grid) {
-        int N = grid.length;
-        int M = grid[0].length;
+        int N = grid.length, M = grid[0].length, maxCoins = 0;
         ArrayList<Integer> maxPath = new ArrayList<>();
-        int maxCoins = 0;
 
         for (int col = 0; col < M; col++) {
             ArrayList<Integer> path = new ArrayList<>();
@@ -34,9 +32,8 @@ public class Q5BruteForceApproach {
     public static int maxCoinsBruteForce(int[][] grid, int row, int col, int N, int M, ArrayList<Integer> path) {
         if (row == N) return 0;
 
-        int currentCoins = grid[row][col];
+        int currentCoins = grid[row][col], maxCoins = 0;
         ArrayList<Integer> bestPath = new ArrayList<>();
-        int maxCoins = 0;
 
         int downCoins = maxCoinsBruteForce(grid, row + 1, col, N, M, bestPath);
         if (downCoins > maxCoins) {
